@@ -158,7 +158,12 @@ var SearchCellControl = L.Control.extend(
 function init() {
     'use strict';
     var key = 'pk.b3962295d51013cd924ddea0eead2a78';
-    var streets = L.tileLayer.Unwired({key: key, scheme: "streets"});
+
+    var streets = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoomm: 18,
+	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    });
+
     map = L.map('map', {
         center: [54.346524,10.207548], //map loads with this location as center
         zoom: 10,
@@ -186,25 +191,9 @@ function init() {
     ), legend = L.control({position: 'topleft'});
     coverage.addTo(map);
     L.control.layers({ 'Streets': streets }, { 'Coverage': coverage }).addTo(map);
-/*
-    L.control.layers({ 'Streets': streets }, { 'Coverage': coverage, 'Cells': markers }).addTo(map);
-    map.on('moveend', getMarkers);
-*/
+    
     map.addControl(L.control.scale());
     map.addControl(new L.Control.Permalink({ useLocation: true, text: null }));
-
-/*
-    // Add the autocomplete text box
-    L.control.geocoder(key, {
-        // placeholder: 'Search nearby',
-        url: "https://api.locationiq.com/v1",
-        expanded: true,
-        panToPoint: true,
-        focus: false,
-        placeholder: 'Find a city (e.g. London)',
-        position: "topleft"
-    }).addTo(map);
-*/
 
     map.addControl(new SearchCellControl({position: 'topleft'}));
     map.addControl(mapInfo);
