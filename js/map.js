@@ -198,26 +198,6 @@ function init() {
     map.addControl(new SearchCellControl({position: 'topleft'}));
     map.addControl(mapInfo);
     
-    //getTimestamp();
-    legend.onAdd = function () {
-        var div = L.DomUtil.create('div', 'info legend leaflet-control-attribution'),
-            radioTypes = [
-                ['G', 'GSM'],
-                ['C', 'CDMA'],
-                ['U', 'UMTS'],
-                ['L', 'LTE']
-            ];
-        // div.innerHTML += '<span style="line-height: 10px;"><small>Reds denote fewer cells, <br/>whites are denser areas.<br /></span>';
-        // div.innerHTML += '<img src="/images/gradient-legend.png"><br />';
-        radioTypes.forEach(
-            function (radioType) {
-                div.innerHTML += '<b>' + radioType[0] + '</b>: ' + radioType[1] + '<br />';
-            }
-        );
-        return div;
-    };
-
-    legend.addTo(map);
 }
 
 window.addEventListener('load', init, false);
