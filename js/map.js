@@ -166,7 +166,7 @@ function init() {
 
     map = L.map('map', {
         center: [54.346524,10.207548], //map loads with this location as center
-        zoom: 10,
+        zoom: 22,
         maxZoom: 18,
         minZoom: 2,
         layers: [streets] // Show 'streets' by default
