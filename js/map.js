@@ -110,7 +110,7 @@ function goToCell(e) {
 // Hide the infoBox after the seconds provided in $duration
 function hideInfoBox(duration) {
     setTimeout(function() {
-        infoBox.innerHTML = 'System OK';
+        //infoBox.innerHTML = 'System OK';
     }, duration);
 }
 
