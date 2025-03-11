@@ -172,9 +172,6 @@ function init() {
         layers: [streets] // Show 'streets' by default
     });
     map.zoomControl.setPosition('topright');
-    map.addControl(new L.Control.Fullscreen({
-        position: "topright"
-    }));
 /*
     L.control.locate(
         {
