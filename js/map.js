@@ -124,7 +124,7 @@ var SearchCellControl = L.Control.extend(
             'use strict';
             var ajax = new XMLHttpRequest();
             ajax.onreadystatechange = goToCell;
-            ajax.open('GET', 'https://opencellidapi.gps4pets.de/?mcc=' + document.getElementById('mcc').value + '&mnc=' + document.getElementById('mnc').value + '&lac=' + document.getElementById('lac').value + '&cell_id=' + document.getElementById('cell_id').value);
+            ajax.open('GET', 'https://opencellid.gps4pets.de/api/?mcc=' + document.getElementById('mcc').value + '&mnc=' + document.getElementById('mnc').value + '&lac=' + document.getElementById('lac').value + '&cell_id=' + document.getElementById('cell_id').value);
             ajax.send(null);
         },
         onAdd: function () {
