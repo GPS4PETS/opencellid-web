@@ -92,7 +92,8 @@ function goToCell(e) {
         // Checking explicitly for cell === false since cell can also contain "Too many requests" error in case of rate limit.
         if (cell.hasOwnProperty('lat') && cell.hasOwnProperty('lon')) {
             map.setView(cell, 18);
-            //Hide the InfoBox immediately in case of successful response
+            L.marker([cell.lat, cell.lon]).addTo(map); 
+	    //Hide the InfoBox immediately in case of successful response
             hideInfoBox(0);
         } else if (cell == "Too many requests") {
             infoBox.innerHTML = "Request exceeded the rate-limits, please try again after some time.";
