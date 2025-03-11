@@ -5,6 +5,31 @@ var map, markers, circle, httpRequest = new XMLHttpRequest(), addedPoints = [], 
 var infoBox = document.getElementById('infoBox');
 var theMarker = {};
 
+
+function getRequests() {
+    var s1 = location.search.substring(1, location.search.length).split('&');
+    var r = {};
+    var s2, i;
+    for (i = 0; i < s1.length; i += 1) {
+        s2 = s1[i].split('=');
+        r[s2[0].toLowerCase()] = s2[1];
+    }
+    return r;
+};
+
+function setParams() {
+        var QueryString = getRequests();
+
+	if (QueryString["mcc"]) {
+        	document.getElementById("mcc").value = QueryString["mcc"];
+        	document.getElementById("mnc").value = QueryString["mnc"];
+        	document.getElementById("lac").value = QueryString["lac"];
+        	document.getElementById("cell_id").value = QueryString["cell_id"];
+
+        	document.getElementById("submit").click();
+	}
+}
+
 function displayCircle(e) {
     'use strict';
     if (circle) {
@@ -129,6 +154,7 @@ var SearchCellControl = L.Control.extend(
             'use strict';
             var ajax = new XMLHttpRequest();
             ajax.onreadystatechange = goToCell;
+
             ajax.open('GET', 'https://opencellid.gps4pets.de/api/?mcc=' + document.getElementById('mcc').value + '&mnc=' + document.getElementById('mnc').value + '&lac=' + document.getElementById('lac').value + '&cell_id=' + document.getElementById('cell_id').value);
             ajax.send(null);
         },
@@ -152,6 +178,7 @@ var SearchCellControl = L.Control.extend(
                 container.appendChild(field);
             }
             submitBtn.textContent = 'Search';
+	    submitBtn.id = 'submit';
             submitBtn.addEventListener('click', this.searchCell, false);
             container.appendChild(submitBtn);
             L.DomEvent.disableClickPropagation(container);
@@ -199,7 +226,8 @@ function init() {
 
     map.addControl(new SearchCellControl({position: 'topleft'}));
     map.addControl(mapInfo);
-    
+
+    setParams();
 }
 
 window.addEventListener('load', init, false);
