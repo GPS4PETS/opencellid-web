@@ -3,6 +3,7 @@
 var map, markers, circle, httpRequest = new XMLHttpRequest(), addedPoints = [], mapInfo = new InfoControl({position: 'bottomright', content: ''});
 // Initialize the infoBox to show message
 var infoBox = document.getElementById('infoBox');
+var theMarker = {};
 
 function displayCircle(e) {
     'use strict';
@@ -91,10 +92,13 @@ function goToCell(e) {
         // This is done to fix no response msg for OCID website in case of no cells
         // Checking explicitly for cell === false since cell can also contain "Too many requests" error in case of rate limit.
         if (cell.hasOwnProperty('lat') && cell.hasOwnProperty('lon')) {
-            map.setView(cell, 18);
-	    L.marker([cell.lat, cell.lon]).addTo(map); 
-	    //Hide the InfoBox immediately in case of successful response
-            hideInfoBox(0);
+            	map.setView(cell, 18);
+		if (map.hasLayer(theMarker)) {
+   			map.removeLayer(theMarker);
+		}	
+		theMarker = L.marker([cell.lat,cell.lon]).addTo(map);  
+	    	//Hide the InfoBox immediately in case of successful response
+            	hideInfoBox(0);
         } else if (cell == "Too many requests") {
             infoBox.innerHTML = "Request exceeded the rate-limits, please try again after some time.";
             hideInfoBox(5000);
