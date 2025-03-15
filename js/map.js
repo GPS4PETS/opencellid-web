@@ -196,6 +196,11 @@ function init() {
 	attribution: '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'
     });
 
+    streets = L.tileLayer('https://osm.gps4pets.de/osm_tiles/{z}/{x}/{y}.png', {
+        maxZoomm: 18,
+        attribution: '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+    });
+
     map = L.map('map', {
         center: [54.346524,10.207548], //map loads with this location as center
         zoom: 8,
