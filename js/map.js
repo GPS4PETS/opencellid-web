@@ -5,7 +5,6 @@ var map, markers, circle, httpRequest = new XMLHttpRequest(), addedPoints = [], 
 var infoBox = document.getElementById('infoBox');
 var theMarker = {};
 
-
 function getRequests() {
     var s1 = location.search.substring(1, location.search.length).split('&');
     var r = {};
@@ -201,6 +200,7 @@ function init() {
         attribution: '<a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'
     });
 
+
     map = L.map('map', {
         center: [54.346524,10.207548], //map loads with this location as center
         zoom: 8,
@@ -209,13 +209,9 @@ function init() {
         layers: [streets] // Show 'streets' by default
     });
     map.zoomControl.setPosition('topright');
-/*
-    L.control.locate(
-        {
-            position: 'bottomright'
-        }
-    ).addTo(map);
-*/
+
+    L.control.locate({ position: 'topright' }).addTo(map); 
+    
     var coverage = L.tileLayer(
         "https://opencellid.org/images/maps/opencellid/{z}/{x}/{y}.png?v=",
         {
@@ -225,7 +221,7 @@ function init() {
     ), legend = L.control({position: 'topleft'});
     coverage.addTo(map);
     L.control.layers({ 'Streets': streets }, { 'Coverage': coverage }).addTo(map);
-    
+   
     map.addControl(L.control.scale());
     map.addControl(new L.Control.Permalink({ useLocation: true, text: null }));
 
